@@ -1,13 +1,15 @@
 import type { ReactElement } from 'react'
+import { Theme } from '@radix-ui/themes'
 import { useTheme } from '../theme/use'
-import { AppToolList } from './list'
 
 export function AppBox(): ReactElement {
-  useTheme()
+  const theme = useTheme()
 
   return (
-    <div className="w-screen h-screen flex justify-center p-32">
-      <AppToolList />
-    </div>
+    <Theme accentColor="tomato" grayColor="sand" appearance={theme}>
+      <div className="w-screen h-screen flex justify-center p-32">
+        Mark my pdf
+      </div>
+    </Theme>
   )
 }

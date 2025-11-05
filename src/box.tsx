@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
+import '@radix-ui/themes/styles.css'
 import './style/main.css'
 
 const container = document.getElementById('root')

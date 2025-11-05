@@ -1,20 +1,10 @@
-@import "tailwindcss";
-
-@theme {
-  --*: initial;
-  --spacing: 1px;
+html, body, #root {
+  /* Avoid overflow scrolling */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-@import "./color.css";
-@import "./shadow.css";
-@import "./typography.css";
-@import "./radius.css";
-
-@theme {
-  /* Allow 2 columns */
-  --breakpoint-sm: 640px;
-  /* Allow 3 columns */
-  --breakpoint-md: 960px;
+body {
+  touch-action: manipulation;
 }
-
-@import "./global.css";
