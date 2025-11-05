@@ -7,6 +7,7 @@ import { HandTool, SelectTool, track, useEditor, ZoomTool } from 'tldraw'
 const toggleGroupItemClasses = twJoin(
   'flex items-center justify-center p-10 rounded-4 text-gray-11',
   'hover:bg-gray-3 focus:outline-none',
+  'data-[state=on]:bg-accent-4 data-[state=on]:text-accent-11',
 )
 
 export const EditorToolbarNavigate = track((): ReactElement => {

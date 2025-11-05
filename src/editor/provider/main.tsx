@@ -1,5 +1,10 @@
 import type { ReactElement } from 'react'
-import { createShapeId, Tldraw } from 'tldraw'
+import type { PdfPage } from '../../libs/pdf/type'
+import { useQuery } from '@tanstack/react-query'
+import { Tldraw } from 'tldraw'
+import { getPdfPages } from '../../libs/pdf/get-pages'
+import { renderPages } from '../../page/render'
+import { UIOverlaySpinner } from '../../ui/overlay-spinner'
 import { EDITOR_CAMERA } from '../camera'
 import { editorComponents } from '../component/components'
 import { editorTools } from '../tool/main'
@@ -7,28 +12,23 @@ import { editorTools } from '../tool/main'
 export function EditorProvider(props: { children: ReactElement }): ReactElement {
   const { children } = props
 
+  const { data: pages } = useQuery({
+    queryKey: ['sample-pdf-pages'],
+    queryFn: async (): Promise<PdfPage[]> => {
+      return getPdfPages()
+    },
+  })
+
+  if (!pages)
+    return <UIOverlaySpinner visible />
+
   return (
     <Tldraw
       components={editorComponents}
       tools={editorTools}
       cameraOptions={EDITOR_CAMERA.options}
       onMount={(editor) => {
-        Array.from({ length: 10 }).forEach(() => {
-          editor.createShape({
-            id: createShapeId(),
-            type: 'geo',
-            x: Math.random() * 1000,
-            y: Math.random() * 1000,
-            props: {
-              geo: 'rectangle',
-              w: Math.random() * 100,
-              h: Math.random() * 100,
-              dash: 'draw',
-              color: 'blue',
-              size: 'm',
-            },
-          })
-        })
+        renderPages(editor, pages)
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
 import { EditorProvider } from './editor/provider/main'
+import { DataProvider } from './libs/data/provider'
+import './libs/pdf/setup'
 import '@radix-ui/themes/styles.css'
 import 'tldraw/tldraw.css'
 import './style/main.css'
@@ -12,9 +14,11 @@ if (container === null)
 
 const app = (
   <StrictMode>
-    <EditorProvider>
-      <AppBox />
-    </EditorProvider>
+    <DataProvider>
+      <EditorProvider>
+        <AppBox />
+      </EditorProvider>
+    </DataProvider>
   </StrictMode>
 )
 

@@ -8,7 +8,7 @@ export function AppBox(): ReactElement {
   useTheme()
 
   return (
-    <Theme accentColor="tomato" grayColor="sand">
+    <Theme accentColor="indigo" grayColor="sand">
       <div className="w-screen h-screen flex justify-center flex-col overflow-hidden">
         <ToolbarBox />
         <EditorBox />
