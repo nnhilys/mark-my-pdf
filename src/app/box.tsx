@@ -1,14 +1,17 @@
 import type { ReactElement } from 'react'
 import { Theme } from '@radix-ui/themes'
+import { EditorBox } from '../editor/box'
 import { useTheme } from '../theme/use'
+import { ToolbarBox } from '../toolbar/box'
 
 export function AppBox(): ReactElement {
-  const theme = useTheme()
+  useTheme()
 
   return (
-    <Theme accentColor="tomato" grayColor="sand" appearance={theme}>
-      <div className="w-screen h-screen flex justify-center p-32">
-        Mark my pdf
+    <Theme accentColor="tomato" grayColor="sand">
+      <div className="w-screen h-screen flex justify-center flex-col overflow-hidden">
+        <ToolbarBox />
+        <EditorBox />
       </div>
     </Theme>
   )

@@ -1,14 +1,18 @@
-import type { Theme } from './pref'
+import { useEffect } from 'react'
+import { useEditor } from 'tldraw'
 import { useMedia } from '../util/media'
 import { usePref } from './store'
 
-export function useTheme(): Exclude<Theme, 'system'> {
-  const theme = usePref(state => state.theme)
+const list = document.documentElement.classList
 
+export function useTheme() {
+  const editor = useEditor()
+  const theme = usePref(state => state.theme)
   const prefersDark = useMedia('(prefers-color-scheme: dark)')
 
-  if (theme === 'system')
-    return prefersDark ? 'dark' : 'light'
-
-  return theme
+  useEffect(() => {
+    const force = theme === 'system' ? prefersDark : theme === 'dark'
+    list.toggle('dark', force)
+    editor.user.updateUserPreferences({ colorScheme: theme })
+  }, [editor, theme, prefersDark])
 }

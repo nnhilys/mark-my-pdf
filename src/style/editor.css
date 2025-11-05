@@ -1,0 +1,40 @@
+/*
+@TODO: Can we do this with "component", like Brush?
+
+tldraw uses "blue" as the selection colour by default.
+However, we use "blue" (and other primary colours) in annotation colours,
+so we should use a neutral one for selection.
+
+Since selection indicators are scale-independent
+(e.g., their stroke width does not change when the user zooms the canvas),
+it's best to use the foreground colour because:
+- At a far zoom level, the indicator is often bigger than the annotation,
+  so it should be opposite of the PDF's background, which is always "white".
+- At a close zoom level, the indicator is often smaller than the annotation,
+  so the colourful annotations will make it clear to see.
+*/
+.tl-theme__light:not(#never) {
+  --color-selected: transparent;
+  --color-selection-stroke: black;
+  --color-selection-fill: rgba(0, 0, 0, 0.25);
+}
+
+/*
+Same as above but for dark theme.
+*/
+.tl-theme__dark:not(#never) {
+  --color-selected: transparent;
+  --color-selection-stroke: white;
+  --color-selection-fill: rgba(255, 255, 255, 0.25);
+}
+
+/*
+Prevent visual distraction
+*/
+.tl-container:focus-within:not(#never) {
+  outline: none;
+}
+
+.tl-watermark_SEE-LICENSE {
+  top: 12px !important;
+}

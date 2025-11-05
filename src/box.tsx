@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
+import { EditorProvider } from './editor/provider/main'
 import '@radix-ui/themes/styles.css'
+import 'tldraw/tldraw.css'
 import './style/main.css'
 
 const container = document.getElementById('root')
@@ -10,7 +12,9 @@ if (container === null)
 
 const app = (
   <StrictMode>
-    <AppBox />
+    <EditorProvider>
+      <AppBox />
+    </EditorProvider>
   </StrictMode>
 )
 

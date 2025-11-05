@@ -1,10 +1,12 @@
-html, body, #root {
-  /* Avoid overflow scrolling */
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+@import "tailwindcss";
+
+@theme {
+  --*: initial;
+  --spacing: 1px;
 }
 
-body {
-  touch-action: manipulation;
-}
+@import './color.css';
+@import './editor.css';
+@import './radius.css';
+
+@import './global.css';
