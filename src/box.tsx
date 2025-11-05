@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
-import { EditorProvider } from './editor/provider/main'
+import { EditorProvider } from './editor/provider'
 import { DataProvider } from './libs/data/provider'
 import './libs/pdf/setup'
 import '@radix-ui/themes/styles.css'

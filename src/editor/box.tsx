@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react'
 import { DefaultCanvas } from 'tldraw'
-import { EditorZoomProvider } from './provider/zoom'
 import { EditorToolbarNavigate } from './toolbar/navigate'
 import { EditorToolbarZoom } from './toolbar/zoom'
+import { EditorZoomProvider } from './zoom'
 
 export function EditorBox(): ReactElement {
   // This defines the slot for tldraw to put the editor canvas in.
