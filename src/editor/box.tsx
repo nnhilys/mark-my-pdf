@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react'
 import { DefaultCanvas } from 'tldraw'
+import { PrintButton } from '../print/button'
 import { EditorToolbarDelete } from './toolbar/delete'
 import { EditorToolbarDuplicate } from './toolbar/duplicate'
 import { EditorToolbarHistory } from './toolbar/history'
@@ -18,6 +19,9 @@ export function EditorBox(): ReactElement {
     <div className="flex-1 relative w-full h-full bg-gray-3" draggable={false}>
       <div className="absolute top-16 left-16 z-(--tl-layer-panels)">
         <EditorToolbarNavigate />
+      </div>
+      <div className="absolute top-16 right-16 z-(--tl-layer-panels)">
+        <PrintButton />
       </div>
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-(--tl-layer-panels)">
         <div className="flex gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4">

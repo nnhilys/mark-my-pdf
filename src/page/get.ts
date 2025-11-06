@@ -13,7 +13,7 @@ export const PAGE_PDF_SCALE = 8
 // Spacing between pages
 export const PAGE_PDF_SPACING = 32
 
-export async function getPages(): Promise<PageDetail[]> {
+export async function getPages(scale: number = PAGE_PDF_SCALE): Promise<PageDetail[]> {
   const result = await fetch(samplePdf)
   const data = await result.arrayBuffer()
 
@@ -28,7 +28,7 @@ export async function getPages(): Promise<PageDetail[]> {
   for (let i = 0; i < pdf.numPages; i++) {
     const page = await pdf.getPage(i + 1)
 
-    const viewport = page.getViewport({ scale: PAGE_PDF_SCALE })
+    const viewport = page.getViewport({ scale })
 
     // Render pdf page on the canvas
     const canvas = document.createElement('canvas')
@@ -42,8 +42,8 @@ export async function getPages(): Promise<PageDetail[]> {
     await page.render({ canvasContext: context, viewport }).promise
     page.cleanup()
 
-    const width = viewport.width / PAGE_PDF_SCALE
-    const height = viewport.height / PAGE_PDF_SCALE
+    const width = viewport.width / scale
+    const height = viewport.height / scale
     const top = i * (height + PAGE_PDF_SPACING)
 
     pages.push({

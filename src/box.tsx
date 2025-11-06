@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
 import { EditorProvider } from './editor/provider'
 import { DataProvider } from './libs/data/provider'
+import { PageProvider } from './page/provider'
 import './libs/pdf/setup'
 import '@radix-ui/themes/styles.css'
 import 'tldraw/tldraw.css'
@@ -15,9 +16,11 @@ if (container === null)
 const app = (
   <StrictMode>
     <DataProvider>
-      <EditorProvider>
-        <AppBox />
-      </EditorProvider>
+      <PageProvider>
+        <EditorProvider>
+          <AppBox />
+        </EditorProvider>
+      </PageProvider>
     </DataProvider>
   </StrictMode>
 )
