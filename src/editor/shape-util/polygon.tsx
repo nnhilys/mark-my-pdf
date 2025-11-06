@@ -1,7 +1,7 @@
 import type { HandleSnapGeometry, TLHandle } from 'tldraw'
 import type { PolygonShape } from '../../shape/polygon/shape'
 import type { PolygonShapeProps } from '../tool/polygon/shape'
-import { getIndexBetween, getIndices, Polygon2d, Polyline2d, ShapeUtil, sortByIndex, SVGContainer, Vec, WeakCache } from 'tldraw'
+import { Edge2d, getIndexBetween, getIndices, Polygon2d, Polyline2d, ShapeUtil, sortByIndex, SVGContainer, Vec, WeakCache } from 'tldraw'
 import { PolygonShapeComponent } from '../../shape/polygon/component'
 import { PolygonShapeSvg } from '../../shape/polygon/svg'
 import { polygonShapeProps } from '../tool/polygon/shape'
@@ -38,25 +38,26 @@ export class PolygonShapeUtil extends ShapeUtil<PolygonShape> {
 
   override getHandles(shape: PolygonShape) {
     return handlesCache.get(shape.props, () => {
-      const spline = getGeometryForLineShape(shape)
       const points = linePointsToArray(shape)
       const results: TLHandle[] = points.map(point => ({
         ...point,
         id: point.index,
         type: 'vertex',
-        canSnap: true,
+        snapType: 'point',
       }))
 
       for (let i = 0; i < points.length - 1; i++) {
         const index = getIndexBetween(points[i].index, points[i + 1].index)
-        const point = spline.center
+        const start = new Vec(points[i].x, points[i].y)
+        const end = new Vec(points[i + 1].x, points[i + 1].y)
+        const point = new Edge2d({ start, end }).center
         results.push({
           id: index,
           type: 'create',
           index,
           x: point.x,
           y: point.y,
-          canSnap: true,
+          snapType: 'point',
         })
       }
 
@@ -135,7 +136,7 @@ export class PolygonShapeUtil extends ShapeUtil<PolygonShape> {
 
 function getGeometryForLineShape(shape: PolygonShape): Polyline2d {
   const points = linePointsToArray(shape).map(Vec.From)
-  return new Polyline2d({ points })
+  return new Polyline2d({ points: [...points, points[0]] })
 }
 
 function linePointsToArray(shape: PolygonShape) {

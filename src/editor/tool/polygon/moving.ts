@@ -252,7 +252,7 @@ export class PolygonMoving extends StateNode {
 
     let nextHandle = { ...initialHandle, x: point.x, y: point.y }
 
-    if (initialHandle.canSnap && (isSnapMode ? !ctrlKey : ctrlKey)) {
+    if (initialHandle.snapType === 'point' && (isSnapMode ? !ctrlKey : ctrlKey)) {
       // We're snapping
       const pageTransform = editor.getShapePageTransform(shape.id)
       if (!pageTransform)
