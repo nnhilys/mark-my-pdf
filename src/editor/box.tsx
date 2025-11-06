@@ -1,15 +1,18 @@
 import type { ReactElement } from 'react'
 import { DefaultCanvas } from 'tldraw'
-import { PrintButton } from '../print/button'
+import { PrintToolbar } from '../print/toolbar'
 import { EditorToolbarDelete } from './toolbar/delete'
 import { EditorToolbarDuplicate } from './toolbar/duplicate'
 import { EditorToolbarHistory } from './toolbar/history'
 import { EditorToolbarManual } from './toolbar/manual'
 import { EditorToolbarNavigate } from './toolbar/navigate'
+import { EditorToolbarReset } from './toolbar/upload'
 import { EditorToolbarZoom } from './toolbar/zoom'
 import { EditorZoomProvider } from './zoom'
 
-export function EditorBox(): ReactElement {
+export function EditorBox(props: { reset: () => void }): ReactElement {
+  const { reset } = props
+
   // This defines the slot for tldraw to put the editor canvas in.
   // The editor is actually created much sooner, as a provider.
   // To learn more, see "editor/provider".
@@ -20,16 +23,16 @@ export function EditorBox(): ReactElement {
       <div className="absolute top-16 left-16 z-(--tl-layer-panels)">
         <EditorToolbarNavigate />
       </div>
-      <div className="absolute top-16 right-16 z-(--tl-layer-panels)">
-        <PrintButton />
-      </div>
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-(--tl-layer-panels)">
-        <div className="flex gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4">
+        <div className="flex gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4 text-gray-11">
           <EditorToolbarHistory />
           <EditorToolbarDuplicate />
           <EditorToolbarDelete />
           <div className="w-1 bg-gray-5" />
           <EditorToolbarManual />
+          <div className="w-1 bg-gray-5" />
+          <EditorToolbarReset reset={reset} />
+          <PrintToolbar />
           <div className="w-1 bg-gray-5" />
           <EditorToolbarZoom />
         </div>

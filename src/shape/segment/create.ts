@@ -38,7 +38,7 @@ export function createSegmentShape(props: {
     y: absStart.y,
     props: {
       dash: 'solid',
-      size: 'l',
+      size: 's',
       color: color ?? randomShapeColor(),
       points,
     },

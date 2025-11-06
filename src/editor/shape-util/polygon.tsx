@@ -23,7 +23,7 @@ export class PolygonShapeUtil extends ShapeUtil<PolygonShape> {
     const [start, end] = getIndices(2)
     return {
       color: 'grey',
-      size: 'l',
+      size: 's',
       points: {
         [start]: { id: start, index: start, x: 0, y: 0 },
         [end]: { id: end, index: end, x: 0, y: 0 },

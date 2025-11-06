@@ -13,9 +13,18 @@ export const PAGE_PDF_SCALE = 8
 // Spacing between pages
 export const PAGE_PDF_SPACING = 32
 
-export async function getPages(scale: number = PAGE_PDF_SCALE): Promise<PageDetail[]> {
-  const result = await fetch(samplePdf)
-  const data = await result.arrayBuffer()
+export async function getPages(
+  file: File | 'sample',
+  scale: number = PAGE_PDF_SCALE,
+): Promise<PageDetail[]> {
+  let data: ArrayBuffer
+  if (file === 'sample') {
+    const result = await fetch(samplePdf)
+    data = await result.arrayBuffer()
+  }
+  else {
+    data = await file.arrayBuffer()
+  }
 
   const pdf = await getDocument({
     data,

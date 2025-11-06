@@ -46,7 +46,7 @@ export const EditorToolbarZoom = track((): ReactElement => {
     <>
       <button
         type="button"
-        className="p-10 rounded-4 text-gray-11 hover:bg-gray-3"
+        className="p-10 rounded-4 hover:bg-gray-3"
         onClick={zoomOut}
       >
         <ZoomOut size={20} />
@@ -55,7 +55,7 @@ export const EditorToolbarZoom = track((): ReactElement => {
         <DropdownMenu.Trigger>
           <button
             type="button"
-            className="flex items-center gap-8 p-10 rounded-4 text-gray-11 hover:bg-gray-3"
+            className="flex items-center gap-8 p-10 rounded-4 hover:bg-gray-3"
           >
             <Text size="2">{`${Math.round(level * 100)}%`}</Text>
             <DropdownMenu.TriggerIcon />

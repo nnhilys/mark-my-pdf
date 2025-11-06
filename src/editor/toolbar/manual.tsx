@@ -8,7 +8,7 @@ import { POLYGON_TOOL_ID } from '../../shape/polygon/tool'
 import { SEGMENT_TOOL_ID } from '../../shape/segment/tool'
 
 const toggleGroupItemClasses = twJoin(
-  'flex items-center justify-center p-10 rounded-4 text-gray-11',
+  'flex items-center justify-center p-10 rounded-4',
   'hover:bg-gray-3 focus:outline-none',
   'data-[state=on]:bg-accent-4 data-[state=on]:text-accent-11',
 )

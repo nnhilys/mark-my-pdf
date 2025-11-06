@@ -22,7 +22,7 @@ export function createPolygonShape(props: {
     y,
     props: {
       points,
-      size: 'l',
+      size: 's',
       color: color ?? randomShapeColor(),
     },
     meta: {

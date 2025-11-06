@@ -4,7 +4,7 @@ import { getIndicesBetween, sortByIndex } from 'tldraw'
 import { EDITOR_CAMERA } from '../editor/camera'
 import { createPageAssets, createPageShape } from './shape'
 
-// References: https://tldraw.dev/examples/use-cases/pdf-editor
+// References: https://tldraw.dev/examples/pdf-editor
 export function renderPages(editor: Editor, pages: PageDetail[]) {
   editor.updateInstanceState({ isDebugMode: false })
 

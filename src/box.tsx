@@ -1,9 +1,8 @@
+import { Theme } from '@radix-ui/themes'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppBox } from './app/box'
-import { EditorProvider } from './editor/provider'
 import { DataProvider } from './libs/data/provider'
-import { PageProvider } from './page/provider'
 import './libs/pdf/setup'
 import '@radix-ui/themes/styles.css'
 import 'tldraw/tldraw.css'
@@ -16,11 +15,11 @@ if (container === null)
 const app = (
   <StrictMode>
     <DataProvider>
-      <PageProvider>
-        <EditorProvider>
+      <Theme accentColor="indigo" grayColor="sand">
+        <div className="w-screen h-screen overflow-hidden">
           <AppBox />
-        </EditorProvider>
-      </PageProvider>
+        </div>
+      </Theme>
     </DataProvider>
   </StrictMode>
 )

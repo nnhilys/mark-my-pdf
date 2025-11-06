@@ -6,13 +6,14 @@ import { getPages } from '../page/get'
 import { printWorker } from './worker/main'
 
 export async function printPDF(props: {
+  file: File | 'sample'
   shapes: AnnotShape[]
   onProgress: (current: number, total: number) => void
 }): Promise<boolean> {
-  const { shapes, onProgress } = props
+  const { file, shapes, onProgress } = props
 
   // Re-render pages with scale 2 for print PDF generation
-  const pages: PageDetail[] = await getPages(2)
+  const pages: PageDetail[] = await getPages(file, 2)
 
   const printPages: PrintPage[] = pages.map(page => ({
     id: page.id,

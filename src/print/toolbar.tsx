@@ -1,12 +1,15 @@
 import type { ReactElement } from 'react'
+import { Download } from 'lucide-react'
 import { useState } from 'react'
 import { track, useEditor } from 'tldraw'
+import { usePages } from '../page/context'
 import { isAnnotShape } from '../shape/shape'
 import { PrintDialog } from './dialog'
 import { printPDF } from './print'
 
-export const PrintButton = track((): ReactElement => {
+export const PrintToolbar = track((): ReactElement => {
   const editor = useEditor()
+  const { file } = usePages()
 
   const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -15,29 +18,29 @@ export const PrintButton = track((): ReactElement => {
   const [exportComplete, setExportComplete] = useState(false)
   const [exportError, setExportError] = useState<string | null>(null)
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     setIsExporting(true)
     setProgress(null)
     setExportComplete(false)
     setExportError(null)
 
-    printPDF({
+    const success = await printPDF({
+      file,
       shapes: editor.getCurrentPageShapes().filter(isAnnotShape),
       onProgress: (current, total) => setProgress({ current, total }),
+    }).catch((error) => {
+      setExportError('unknown_error')
+      console.error(error)
     })
-      .then((success) => {
-        if (success) {
-          setExportComplete(true)
-        }
-        else {
-          setExportError('no_data')
-        }
-      })
-      .catch((error) => {
-        setExportError('unknown_error')
-        console.error(error)
-      })
-      .finally(() => setIsExporting(false))
+
+    if (success) {
+      setExportComplete(true)
+    }
+    else {
+      setExportError('no_data')
+    }
+
+    setIsExporting(false)
   }
 
   const handleDialogOpenChange = (open: boolean) => {
@@ -60,11 +63,8 @@ export const PrintButton = track((): ReactElement => {
       exportComplete={exportComplete}
       exportError={exportError}
     >
-      <button
-        type="button"
-        className="flex flex-col gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4"
-      >
-        Print
+      <button type="button" className="p-10">
+        <Download size={20} />
       </button>
     </PrintDialog>
   )
