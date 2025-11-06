@@ -99,7 +99,8 @@ export class PolygonPointing extends StateNode {
         x: this.editor.inputs.currentPagePoint.x,
         y: this.editor.inputs.currentPagePoint.y,
         props: {
-          color: 'grey',
+          size: 's',
+          color: 'light-blue',
         },
       }])
       this.editor.select(id)

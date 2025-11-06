@@ -2,7 +2,7 @@ import type { HandleSnapGeometry, TLHandle } from 'tldraw'
 import type { PolygonShape } from '../../shape/polygon/shape'
 import type { PolygonShapeProps } from '../tool/polygon/shape'
 import { getIndexBetween, getIndices, Polygon2d, Polyline2d, ShapeUtil, sortByIndex, SVGContainer, Vec, WeakCache } from 'tldraw'
-import { isPolygonShape } from '../../shape/polygon/shape'
+import { PolygonShapeComponent } from '../../shape/polygon/component'
 import { PolygonShapeSvg } from '../../shape/polygon/svg'
 import { polygonShapeProps } from '../tool/polygon/shape'
 
@@ -22,7 +22,7 @@ export class PolygonShapeUtil extends ShapeUtil<PolygonShape> {
   override getDefaultProps(): PolygonShapeProps {
     const [start, end] = getIndices(2)
     return {
-      color: 'grey',
+      color: 'light-blue',
       size: 's',
       points: {
         [start]: { id: start, index: start, x: 0, y: 0 },
@@ -96,47 +96,19 @@ export class PolygonShapeUtil extends ShapeUtil<PolygonShape> {
     }
   }
 
-  component(shape: PolygonShape) {
-    const spline = getGeometryForLineShape(shape)
-    return (
-      <SVGContainer id={shape.id}>
-        <PolygonShapeSvg shape={shape} spline={spline} fill="none" />
+  component(polygon: PolygonShape) {
+    const spline = getGeometryForLineShape(polygon)
+    const original = (
+      <SVGContainer id={polygon.id}>
+        <PolygonShapeSvg shape={polygon} spline={spline} fill="semi" />
       </SVGContainer>
     )
+    return <PolygonShapeComponent original={original} polygon={polygon} />
   }
 
   indicator(shape: PolygonShape) {
     const spline = getGeometryForLineShape(shape)
     return <path d={spline.getSvgPathData()} />
-  }
-
-  override toSvg(shape: PolygonShape) {
-    const spline = getGeometryForLineShape(shape)
-
-    if (isPolygonShape(shape)) {
-      const points = linePointsToArray(shape).map(Vec.From)
-      const center = new Polygon2d({ points, isFilled: true }).center
-
-      return (
-        <PolygonShapeSvg shape={shape} spline={spline} fill="none">
-          <g>
-            <rect
-              width="32px"
-              height="10px"
-              ry="4px"
-              rx="4px"
-              style={{
-                transform: `translate(${center.x}px, ${center.y}px)`,
-                padding: '2px',
-                opacity: 1,
-              }}
-            />
-          </g>
-        </PolygonShapeSvg>
-      )
-    }
-
-    return <PolygonShapeSvg shape={shape} spline={spline} fill="none" />
   }
 
   override getHandleSnapGeometry(shape: PolygonShape): HandleSnapGeometry {

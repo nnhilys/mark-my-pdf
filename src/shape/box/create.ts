@@ -23,7 +23,7 @@ export function createBoxShape(props: {
     props: {
       geo: 'rectangle',
       dash: 'solid',
-      fill: 'none',
+      fill: 'semi',
       size: 's',
       color: color ?? randomShapeColor(),
       w,

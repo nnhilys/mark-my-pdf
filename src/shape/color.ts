@@ -8,8 +8,9 @@ import { randomChild } from '../util/array'
 export const SHAPE_COLORS: TLDefaultColorStyle[] = [
   'red',
   'orange',
+  'yellow',
   'green',
-  'light-blue',
+  'light-green',
   'blue',
   'violet',
   'light-violet',

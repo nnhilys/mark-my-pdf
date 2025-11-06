@@ -34,3 +34,8 @@ Prevent visual distraction
 .tl-container:focus-within:not(#never) {
   outline: none;
 }
+
+.shape-component svg path[fill]:not([fill="none"]) {
+  opacity: 0.2;
+  fill: var(--shape-fill-1);
+}
