@@ -43,7 +43,7 @@ export const EditorToolbarZoom = track((): ReactElement => {
   useHotkeys('equal', zoomIn)
 
   return (
-    <div className="flex gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4">
+    <>
       <button
         type="button"
         className="p-10 rounded-4 text-gray-11 hover:bg-gray-3"
@@ -84,6 +84,6 @@ export const EditorToolbarZoom = track((): ReactElement => {
       >
         <ZoomIn size={20} />
       </button>
-    </div>
+    </>
   )
 })

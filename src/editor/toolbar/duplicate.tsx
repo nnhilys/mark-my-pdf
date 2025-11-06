@@ -3,7 +3,7 @@ import { Copy } from 'lucide-react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { track, useEditor } from 'tldraw'
 
-export const ToolbarDuplicate = track((): ReactElement => {
+export const EditorToolbarDuplicate = track((): ReactElement => {
   const editor = useEditor()
 
   const duplicateShapes = () => {

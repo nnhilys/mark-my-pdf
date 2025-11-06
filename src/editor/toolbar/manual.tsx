@@ -1,8 +1,11 @@
 import type { ReactElement } from 'react'
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
-import { Hand, MousePointer2, Search } from 'lucide-react'
+import { LineSquiggle, Pentagon, RectangleHorizontal } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
-import { HandTool, SelectTool, track, useEditor, ZoomTool } from 'tldraw'
+import { track, useEditor } from 'tldraw'
+import { BOX_TOOL_ID } from '../../shape/box/tool'
+import { POLYGON_TOOL_ID } from '../../shape/polygon/tool'
+import { SEGMENT_TOOL_ID } from '../../shape/segment/tool'
 
 const toggleGroupItemClasses = twJoin(
   'flex items-center justify-center p-10 rounded-4 text-gray-11',
@@ -10,13 +13,13 @@ const toggleGroupItemClasses = twJoin(
   'data-[state=on]:bg-accent-4 data-[state=on]:text-accent-11',
 )
 
-export const EditorToolbarNavigate = track((): ReactElement => {
+export const EditorToolbarManual = track((): ReactElement => {
   const editor = useEditor()
 
   return (
     <ToggleGroup.Root
       type="single"
-      className="flex flex-col gap-4 bg-gray-1 p-6 border border-gray-6 rounded-4"
+      className="flex gap-4"
       value={editor.getCurrentToolId()}
       onValueChange={(value) => {
         editor.setCurrentTool(value)
@@ -24,21 +27,21 @@ export const EditorToolbarNavigate = track((): ReactElement => {
     >
       <ToggleGroup.Item
         className={toggleGroupItemClasses}
-        value={SelectTool.id}
+        value={BOX_TOOL_ID}
       >
-        <MousePointer2 size={16} />
+        <RectangleHorizontal size={18} />
       </ToggleGroup.Item>
       <ToggleGroup.Item
         className={toggleGroupItemClasses}
-        value={HandTool.id}
+        value={SEGMENT_TOOL_ID}
       >
-        <Hand size={16} />
+        <LineSquiggle size={18} />
       </ToggleGroup.Item>
       <ToggleGroup.Item
         className={toggleGroupItemClasses}
-        value={ZoomTool.id}
+        value={POLYGON_TOOL_ID}
       >
-        <Search size={16} />
+        <Pentagon size={18} />
       </ToggleGroup.Item>
     </ToggleGroup.Root>
   )

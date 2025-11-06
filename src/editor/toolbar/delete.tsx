@@ -3,7 +3,7 @@ import { Trash2 } from 'lucide-react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { track, useEditor } from 'tldraw'
 
-export const ToolbarDelete = track((): ReactElement => {
+export const EditorToolbarDelete = track((): ReactElement => {
   const editor = useEditor()
 
   // Heads up: This intentionally deletes all types of shapes.

@@ -7,6 +7,7 @@ import { renderPages } from '../page/render'
 import { UIOverlaySpinner } from '../ui/overlay-spinner'
 import { EDITOR_CAMERA } from './camera'
 import { editorComponents } from './component/components'
+import { editorShapeUtils } from './shape-util/main'
 import { editorTools } from './tool/main'
 
 export function EditorProvider(props: { children: ReactElement }): ReactElement {
@@ -26,6 +27,7 @@ export function EditorProvider(props: { children: ReactElement }): ReactElement 
     <Tldraw
       components={editorComponents}
       tools={editorTools}
+      shapeUtils={editorShapeUtils}
       cameraOptions={EDITOR_CAMERA.options}
       onMount={(editor) => {
         renderPages(editor, pages)

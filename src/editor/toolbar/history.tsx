@@ -3,7 +3,7 @@ import { Redo, Undo } from 'lucide-react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { track, useEditor } from 'tldraw'
 
-export const ToolbarHistory = track((): ReactElement => {
+export const EditorToolbarHistory = track((): ReactElement => {
   const editor = useEditor()
 
   const canUndo = editor.getCanUndo()

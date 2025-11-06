@@ -34,7 +34,3 @@ Prevent visual distraction
 .tl-container:focus-within:not(#never) {
   outline: none;
 }
-
-.tl-watermark_SEE-LICENSE {
-  top: 12px !important;
-}
