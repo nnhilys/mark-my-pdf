@@ -1,4 +1,4 @@
-import type { PdfPage } from './type'
+import type { PageDetail } from './type'
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 import { AssetRecordType, Box, createShapeId } from 'tldraw'
 import samplePdf from '/sample.pdf'
@@ -13,7 +13,7 @@ export const PAGE_PDF_SCALE = 8
 // Spacing between pages
 export const PAGE_PDF_SPACING = 32
 
-export async function getPdfPages(): Promise<PdfPage[]> {
+export async function getPages(): Promise<PageDetail[]> {
   const result = await fetch(samplePdf)
   const data = await result.arrayBuffer()
 
@@ -23,7 +23,7 @@ export async function getPdfPages(): Promise<PdfPage[]> {
     cMapPacked: true,
   }).promise
 
-  const pages: PdfPage[] = []
+  const pages: PageDetail[] = []
 
   for (let i = 0; i < pdf.numPages; i++) {
     const page = await pdf.getPage(i + 1)

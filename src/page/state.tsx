@@ -1,7 +1,7 @@
-import type { PdfPage } from '../libs/pdf/type'
+import type { PageDetail } from './type'
 import { createContext, use } from 'react'
 
-export const PageContext = createContext<PdfPage[] | null>(null)
+export const PageContext = createContext<PageDetail[] | null>(null)
 
 export function usePages() {
   const page = use(PageContext)

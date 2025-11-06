@@ -1,5 +1,5 @@
 import type { TLAsset, TLImageShape, TLShape, TLShapePartial } from 'tldraw'
-import type { PdfPage } from '../libs/pdf/type'
+import type { PageDetail } from './type'
 
 interface PageShapeMeta {
   type: 'page'
@@ -13,7 +13,7 @@ export function isPageShape(shape: TLShape): shape is PageShape {
   return shape.meta.type === 'page'
 }
 
-export function createPageShape(page: PdfPage): PageShapePartial {
+export function createPageShape(page: PageDetail): PageShapePartial {
   return {
     id: page.shapeId,
     type: 'image',
@@ -31,7 +31,7 @@ export function createPageShape(page: PdfPage): PageShapePartial {
   }
 }
 
-export function createPageAssets(page: PdfPage): TLAsset {
+export function createPageAssets(page: PageDetail): TLAsset {
   return {
     id: page.assetId,
     typeName: 'asset',

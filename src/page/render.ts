@@ -1,11 +1,11 @@
 import type { Editor } from 'tldraw'
-import type { PdfPage } from '../libs/pdf/type'
+import type { PageDetail } from './type'
 import { getIndicesBetween, sortByIndex } from 'tldraw'
 import { EDITOR_CAMERA } from '../editor/camera'
 import { createPageAssets, createPageShape } from './shape'
 
 // References: https://tldraw.dev/examples/use-cases/pdf-editor
-export function renderPages(editor: Editor, pages: PdfPage[]) {
+export function renderPages(editor: Editor, pages: PageDetail[]) {
   editor.updateInstanceState({ isDebugMode: false })
 
   editor.createAssets(pages.map(createPageAssets))
