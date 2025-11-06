@@ -44,8 +44,8 @@ function renderBox(pdf: JSPDF, page: PrintPage, box: BoxShape, scaleX: number, s
   const h = box.props.h * scaleY
 
   // Draw filled rectangle (x, y, width, height, 'F' = fill only) with 20% opacity
-  // pdf.setGState(new GState({ opacity: 0.2 }))
-  // pdf.rect(x, y, w, h, 'F')
+  pdf.setGState(new GState({ opacity: 0.2 }))
+  pdf.rect(x, y, w, h, 'F')
 
   // Draw border rectangle (same position and size, 'S' = stroke only) with 100% opacity
   pdf.setGState(new GState({ opacity: 1 }))
@@ -86,8 +86,8 @@ function renderPolygon(pdf: JSPDF, page: PrintPage, polygon: PolygonShape, scale
   const [first, ...rest] = polygonPoints
 
   // Draw filled polygon (rest, first[0], first[1], [1, 1], 'F' = fill only) with 20% opacity
-  // pdf.setGState(new GState({ opacity: 0.2 }))
-  // pdf.lines(rest, first[0], first[1], [1, 1], 'F', true)
+  pdf.setGState(new GState({ opacity: 0.2 }))
+  pdf.lines(rest, first[0], first[1], [1, 1], 'F', true)
 
   // Draw border polygon (rest, first[0], first[1], [1, 1], 'S' = stroke only) with 100% opacity
   pdf.setGState(new GState({ opacity: 1 }))
